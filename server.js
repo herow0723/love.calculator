@@ -7,6 +7,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const ADMIN_PASSWORD = String(process.env.ADMIN_PASSWORD || "").trim();
+console.log("ADMIN_PASSWORD loaded:", Boolean(process.env.ADMIN_PASSWORD));
+console.log("ADMIN_PASSWORD length:", String(process.env.ADMIN_PASSWORD || "").length);
 const SESSION_SECRET = process.env.SESSION_SECRET;
 
 if (!ADMIN_PASSWORD || !SESSION_SECRET) {
