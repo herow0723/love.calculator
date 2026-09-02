@@ -58,7 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function loadEntries() {
         try {
-            const response = await fetch("/api/admin/checks");
+            const response = await fetch("/api/admin/checks") {
+                credentials: "include"
+            });
 
             if (!response.ok) {
                 if (response.status === 401) {
@@ -94,7 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
     async function logout() {
         try {
             await fetch("/api/admin/logout", {
-                method: "POST"
+                method: "POST",
+                credentials: "include"
             });
         } finally {
             login.style.display = "block";
