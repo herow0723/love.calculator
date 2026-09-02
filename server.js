@@ -6,7 +6,7 @@ const session = require("express-session");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+const ADMIN_PASSWORD = String(process.env.ADMIN_PASSWORD || "").trim();
 const SESSION_SECRET = process.env.SESSION_SECRET;
 
 if (!ADMIN_PASSWORD || !SESSION_SECRET) {
@@ -83,7 +83,7 @@ app.post("/api/calculate", (req, res) => {
 
 // Admin login
 app.post("/api/admin/login", (req, res) => {
-  const password = String(req.body.password || "");
+  const password = String(req.body.password || "").trim();
 
   if (password !== ADMIN_PASSWORD) {
     return res.status(401).json({
