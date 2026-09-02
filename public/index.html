@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Love Calculator ❤️</title><link rel="stylesheet" href="style.css"></head><body>
+<div class="hearts" aria-hidden="true"></div>
+<main class="card" id="mainCard">
+  <section id="formView">
+    <div class="logo">💗</div><h1>Love Calculator</h1><p class="sub">Enter two names and discover their love score.</p>
+    <form id="loveForm">
+      <label>Boy's name<input id="boy" maxlength="80" autocomplete="off" required placeholder="Enter boy's name"></label>
+      <label>Girl's name<input id="girl" maxlength="80" autocomplete="off" required placeholder="Enter girl's name"></label>
+      <p class="privacy">🔒 Your result is private. This site stores the names entered so the site owner can view the calculator's usage in the private admin area.</p>
+      <button class="primary" type="submit">Calculate Love 💕</button>
+    </form>
+  </section>
+  <section id="resultView" class="hidden">
+    <div class="logo pulse">❤️</div><h2>Love Compatibility</h2>
+    <div class="names"><div><small>BOY</small><strong id="showBoy"></strong></div><span>❤️</span><div><small>GIRL</small><strong id="showGirl"></strong></div></div>
+    <div class="score" id="score">0%</div><div class="bar"><i id="barFill"></i></div><p class="message" id="message"></p>
+    <button class="secondary" id="again">🔄 Try Again</button>
+  </section>
+</main>
+<script src="app.js"></script></body></html>

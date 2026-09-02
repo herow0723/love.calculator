@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin — Love Calculator</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<main class="wrap">
+
+  <div id="login">
+    <h1>🔐 Private Admin</h1>
+    <p>Sign in to view calculator entries.</p>
+
+    <input id="password" type="password" placeholder="Admin password">
+    <button id="loginBtn" type="button">Sign in</button>
+
+    <p id="loginMsg"></p>
+  </div>
+
+  <div id="panel" class="hidden">
+    <header>
+      <div>
+        <h1>📋 Calculator Entries</h1>
+        <p>Latest 1,000 checks</p>
+      </div>
+
+      <div>
+        <button id="refresh" type="button">Refresh</button>
+        <button id="clear" class="danger" type="button">Clear all</button>
+        <button id="logout" type="button">Log out</button>
+      </div>
+    </header>
+
+    <div class="tableWrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Boy</th>
+            <th>Girl</th>
+            <th>Love %</th>
+            <th>Time (UTC)</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<script src="admin.js"></script>
+</body>
+</html>
