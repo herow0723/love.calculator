@@ -46,6 +46,9 @@ app.use(
 // Website files
 app.use(express.static(path.join(__dirname, "public")));
 
+app.get("/admin", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "admin.html"));
+});
 // Calculator
 app.post("/api/calculate", (req, res) => {
   const boy = String(req.body.boy || "").trim();
