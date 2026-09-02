@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function loginAdmin() {
         const pass = password.value;
-
+        console.log("Password entered length:", pass.length);
+ 
         if (!pass) {
             loginMsg.textContent = "Please enter the admin password.";
             return;
