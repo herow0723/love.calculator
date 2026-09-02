@@ -11,10 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const logoutBtn = document.getElementById("logout");
     const rows = document.getElementById("rows");
 
+
+    // =========================
+    // ADMIN LOGIN
+    // =========================
+
     async function loginAdmin() {
         const pass = password.value;
-        console.log("Password entered length:", pass.length);
- 
+
         if (!pass) {
             loginMsg.textContent = "Please enter the admin password.";
             return;
@@ -26,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const response = await fetch("/api/admin/login", {
                 method: "POST",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -51,14 +56,20 @@ document.addEventListener("DOMContentLoaded", () => {
             loadEntries();
 
         } catch (error) {
+            console.error(error);
             loginMsg.textContent = "Could not connect to the server.";
             loginBtn.disabled = false;
         }
     }
 
+
+    // =========================
+    // LOAD HISTORY
+    // =========================
+
     async function loadEntries() {
         try {
-            const response = await fetch("/api/admin/checks") {
+            const response = await fetch("/api/admin/checks", {
                 credentials: "include"
             });
 
@@ -66,7 +77,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (response.status === 401) {
                     login.style.display = "block";
                     panel.classList.add("hidden");
+                    loginMsg.textContent = "Please sign in again.";
                 }
+
                 return;
             }
 
@@ -93,6 +106,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+
+    // =========================
+    // LOGOUT
+    // =========================
+
     async function logout() {
         try {
             await fetch("/api/admin/logout", {
@@ -102,28 +120,48 @@ document.addEventListener("DOMContentLoaded", () => {
         } finally {
             login.style.display = "block";
             panel.classList.add("hidden");
+
             loginBtn.disabled = false;
             loginMsg.textContent = "";
         }
     }
+
+
+    // =========================
+    // CLEAR HISTORY
+    // =========================
 
     async function clearEntries() {
         const confirmed = confirm(
             "Are you sure you want to delete all calculator entries?"
         );
 
-        if (!confirmed) return;
+        if (!confirmed) {
+            return;
+        }
 
-        const response = await fetch("/api/admin/checks", {
-            method: "DELETE"
-        });
+        try {
+            const response = await fetch("/api/admin/checks", {
+                method: "DELETE",
+                credentials: "include"
+            });
 
-        if (response.ok) {
-            loadEntries();
-        } else {
-            alert("Could not clear the entries.");
+            if (response.ok) {
+                loadEntries();
+            } else {
+                alert("Could not clear the entries.");
+            }
+
+        } catch (error) {
+            console.error(error);
+            alert("Could not connect to the server.");
         }
     }
+
+
+    // =========================
+    // SECURITY
+    // =========================
 
     function escapeHTML(value) {
         return String(value)
@@ -134,6 +172,11 @@ document.addEventListener("DOMContentLoaded", () => {
             .replaceAll("'", "&#039;");
     }
 
+
+    // =========================
+    // BUTTON EVENTS
+    // =========================
+
     loginBtn.addEventListener("click", loginAdmin);
 
     password.addEventListener("keydown", (event) => {
@@ -143,6 +186,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     refreshBtn.addEventListener("click", loadEntries);
+
     clearBtn.addEventListener("click", clearEntries);
+
     logoutBtn.addEventListener("click", logout);
 });
