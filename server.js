@@ -4,6 +4,8 @@ const Database = require("better-sqlite3");
 const session = require("express-session");
 
 const app = express();
+app.set(trust proxy", 1);
+
 const PORT = process.env.PORT || 3000;
 
 const ADMIN_PASSWORD = String(process.env.ADMIN_PASSWORD || "").trim();
@@ -41,6 +43,7 @@ app.use(
       httpOnly: true,
       secure: true,
       sameSite: "lax"
+      maxAge: 24 * 60 * 60 * 1000
     }
   })
 );
